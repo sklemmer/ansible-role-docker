@@ -19,8 +19,8 @@ install:
   - pip install ansible==${ANSIBLE_VERSION}
   - gem install inspec
 script:
-  - ansible-playbook -i tests/hosts tests/${SUITE}.yml --syntax-check
-  - ansible-playbook -i tests/hosts tests/${SUITE}.yml
+  - ansible-playbook -i tests/hosts tests/${SUITE}/test.yml --syntax-check
+  - ansible-playbook -i tests/hosts tests/${SUITE}/test.yml
   - inspec exec tests/${SUITE}/role_spec.rb
 
 notifications:
