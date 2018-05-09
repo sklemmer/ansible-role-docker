@@ -4,22 +4,3 @@
   become_method: sudo
   roles:
     - { role: ansible-role-docker, tags: ["docker"]}
-
-# samples from http://docs.ansible.com/ansible/latest/docker_container_module.html
-- name: Docker Containers
-  hosts: all
-  become: true
-  become_method: sudo
-  tasks:
-    - name: Pull alpine image
-      docker_image:
-        name: alpine:latest
-
-    - name: Run a redis container
-      docker_container:
-        name: myredis
-        image: redis:latest
-        command: redis-server --appendonly yes
-        state: started
-        ports:
-          - 6379:6379

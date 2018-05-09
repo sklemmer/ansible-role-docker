@@ -1,9 +1,12 @@
 ---
 driver:
   name: docker
+  volume: /var/
 
 provisioner:
   name: ansible_playbook
+  ansible_cfg_path: test/ansible.cfg
+  requirements_path: test/requirements.yml
   idempotency_test: True
   hosts: all
 
@@ -13,10 +16,10 @@ platforms:
     image: ubuntu:16.04
     platform: ubuntu
 
-- name: ubuntu-18.04
-  driver_config:
-    image: ubuntu:18.04
-    platform: ubuntu
+#- name: ubuntu-18.04
+#  driver_config:
+#    image: ubuntu:18.04
+#    platform: ubuntu
 
 suites:
   - name: default
