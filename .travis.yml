@@ -8,7 +8,7 @@ rvm:
 addons:
   apt:
     update: True
-    packags:
+    packages:
       - ruby-dev
 
 script:
