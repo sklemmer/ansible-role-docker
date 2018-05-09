@@ -1,3 +1,27 @@
+language: python
+python: "2.7"
+
+services: docker
+
+addons:
+  apt:
+    packages:
+      - python-apt
+
+env:
+  - ANSIBLE_VERSION=2.4 SUITE=default
+  - ANSIBLE_VERSION=2.4 SUITE=docker_version
+  - ANSIBLE_VERSION=2.5 SUITE=default
+  - ANSIBLE_VERSION=2.5 SUITE=docker_version
+
+install:
+  - pip install ansible==${ANSIBLE_VERSION}
+  - gem install inspec
+script:
+  - ansible-playbook -i tests/hosts tests/${SUITE}.yml --syntax-check
+  - ansible-playbook -i tests/hosts tests/${SUITE}.yml
+  - inspec exec tests/${SUITE}/role_spec.rb
+
 ---
 services: docker
 
