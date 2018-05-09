@@ -13,9 +13,8 @@ addons:
 
 script:
   # Configure test script so we can run extra tests after playbook is run.
-  - bundle install --quiet
-  - kitchen converge
-  - kitchen verify
-  - kitchen destroy
+  - bundle exec kitchen converge
+  - bundle exec kitchen verify
+  - bundle exec kitchen destroy
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
