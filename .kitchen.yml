@@ -6,7 +6,7 @@ driver:
 provisioner:
   name: ansible_playbook
   ansible_cfg_path: test/ansible.cfg
-  requirements_path: test/requirements.yml
+  #requirements_path: test/requirements.yml
   idempotency_test: True
   hosts: all
 
