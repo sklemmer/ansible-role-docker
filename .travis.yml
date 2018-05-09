@@ -5,7 +5,7 @@ language: ruby
 rvm:
   - 2.5
 
-addon:
+addons:
   apt:
     update: True
     packags:
