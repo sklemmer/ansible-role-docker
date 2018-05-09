@@ -5,6 +5,7 @@ services: docker
 
 addons:
   apt:
+    update: True
     packages:
       - python-apt
 
@@ -21,28 +22,6 @@ script:
   - ansible-playbook -i tests/hosts tests/${SUITE}.yml --syntax-check
   - ansible-playbook -i tests/hosts tests/${SUITE}.yml
   - inspec exec tests/${SUITE}/role_spec.rb
-
----
-services: docker
-
-language: ruby
-rvm:
-  - 2.5
-
-addons:
-  apt:
-    update: True
-    packages:
-      - ruby-dev
-
-before_script:
-  - env
-  - gem env
-script:
-  # Configure test script so we can run extra tests after playbook is run.
-  - bundle exec kitchen converge
-  - bundle exec kitchen verify
-  - bundle exec kitchen destroy
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
