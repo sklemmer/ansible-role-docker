@@ -10,6 +10,11 @@
     - docker_storage_driver is defined
     - docker_storage_driver != ""
 
+- name: ensure docker directory exists
+  file:
+    state: directory
+    path: /etc/docker
+
 - name: ensure daemon config is created
   copy:
     content: "{{ docker_config | to_nice_json }}\n"
