@@ -1,0 +1,18 @@
+---
+- name: Define Docker configuration
+  set_fact:
+    docker_config: "{{ docker_config|combine({ item.key: item.value }) }}"
+  when: item.value != ""
+  with_dict: "{{ docker_options }}"
+
+- include_tasks: "{{ role_path }}/tasks/storage_drivers/{{ docker_storage_driver }}.yml"
+  when:
+    - docker_storage_driver is defined
+    - docker_storage_driver != ""
+
+- name: ensure daemon config is created
+  copy:
+    content: "{{ docker_config | to_nice_json }}\n"
+    dest: /etc/docker/daemon.json
+  when: docker_config != {}
+  notify: Restart docker daemon

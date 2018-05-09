@@ -1,0 +1,17 @@
+galaxy_info:
+  author: sklemmer
+  description: Role to install and configure docker
+  license: MIT
+
+  min_ansible_version: 2.5
+
+  platforms:
+   - name: ubuntu
+     versions:
+       - 16.04
+       - 18.04
+
+  galaxy_tags:
+    - docker
+
+dependencies: []

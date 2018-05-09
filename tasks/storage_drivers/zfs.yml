@@ -1,0 +1,4 @@
+---
+# Needs build from https://docs.docker.com/engine/userguide/storagedriver/zfs-driver/
+- debug:
+    msg: This driver is currently not supported

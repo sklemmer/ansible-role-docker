@@ -1,0 +1,46 @@
+---
+- name: ensure old docker versions are removed
+  package:
+    state: absent
+    name: '{{ item }}'
+  with_items:
+    - docker
+    - docker-engine
+    - docker.io
+
+- name: install docker dependencies
+  package:
+    state: present
+    name: '{{ item }}'
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+
+- name: ensure apt key is present
+  apt_key:
+    id: 0EBFCD88
+    url: "https://download.docker.com/linux/ubuntu/gpg"
+    state: present
+
+- name: add docker repository
+  apt_repository:
+    update_cache: True
+    repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} {{ docker_release_channel }}'
+    state: present
+    filename: 'docker'
+
+- name: Define Docker version
+  set_fact:
+    docker_version: "{{ '' if docker_version == '' or docker_version == 'latest' else '=' + docker_version + '*' }}"
+
+- name: install docker
+  package:
+    state: present
+    name: 'docker-ce{{ docker_version }}'
+
+- name: install ansible dependencies for docker
+  pip:
+    name: docker-py
+    state: present

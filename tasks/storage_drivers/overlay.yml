@@ -1,0 +1,5 @@
+---
+- name: enable overlay driver support
+  modprobe:
+    name: overlay
+    state: present

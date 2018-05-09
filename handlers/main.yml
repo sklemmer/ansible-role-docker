@@ -1,0 +1,6 @@
+---
+# handlers file for ansible-role-docker
+- name: Restart docker daemon
+  service:
+    state: restarted
+    name: docker

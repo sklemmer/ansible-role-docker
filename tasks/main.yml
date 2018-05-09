@@ -1,0 +1,19 @@
+---
+# tasks file for ansible-role-docker    
+- import_tasks: install.yml
+  when:
+    - ansible_distribution == "Ubuntu"
+
+- import_tasks: configure.yml
+
+- name: login to docker registry
+  docker_login:
+    username: '{{ docker_registry_name }}'
+    email: '{{ docker_registry_email | default(omit} }'
+    password: '{{ docker_registry_password }}'
+    registry_url: '{{ docker_registry_url }}'
+    state: present
+  when:
+    - docker_registry_url is defined and docker_registry_url != ''
+    - docker_registry_name is defined and docker_registry_name != ''
+    - docker_registry_password is defined and docker_registry_password != ''
