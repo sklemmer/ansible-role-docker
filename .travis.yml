@@ -3,8 +3,14 @@ services: docker
 
 language: ruby
 rvm:
-  - 2.3
+  - 2.5
 
+addon:
+  apt:
+    update: True
+    packags:
+      - ruby-dev
+      
 script:
   # Configure test script so we can run extra tests after playbook is run.
   - bundle install
