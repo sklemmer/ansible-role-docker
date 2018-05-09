@@ -5,16 +5,22 @@ language: ruby
 rvm:
   - 2.5
 
+env:
+  - PLATTFORM: ubuntu-16.04
+  - PLATTFORM: ubuntu-18.04
+
 addons:
   apt:
     update: True
     packages:
       - ruby-dev
 
+before_script:
+  - which kitchen
 script:
   # Configure test script so we can run extra tests after playbook is run.
-  - bundle exec kitchen converge
-  - bundle exec kitchen verify
-  - bundle exec kitchen destroy
+  - bundle exec kitchen converge $PLATTFORM
+  - bundle exec kitchen verify $PLATTFORM
+  - bundle exec kitchen destroy $PLATTFORM
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
