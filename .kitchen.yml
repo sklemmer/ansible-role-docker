@@ -1,7 +1,6 @@
 ---
 driver:
   name: docker
-  volume: /var/
 
 provisioner:
   name: ansible_playbook
