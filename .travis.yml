@@ -10,12 +10,14 @@ addons:
       - python-apt
 
 env:
-  - ANSIBLE_VERSION=2.4 SUITE=default
-  - ANSIBLE_VERSION=2.4 SUITE=docker_version
-  - ANSIBLE_VERSION=2.5 SUITE=default
-  - ANSIBLE_VERSION=2.5 SUITE=docker_version
+  - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.4 SUITE=default
+  - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.4 SUITE=docker_version
+  - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.5 SUITE=default
+  - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.5 SUITE=docker_version
 
 install:
   - make install
 script:
-  - make suite=${SUITE} ansible=${ANSIBLE_VERSION}
+  - ansible-playbook --syntax-check -i tests/hosts tests/$(suite)/test.yml
+  - ansible-playbook -i tests/hosts tests/$(suite)/test.yml
+  - inspec exec tests/$(suite)/role_spec.rb
