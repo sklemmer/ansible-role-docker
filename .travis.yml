@@ -15,9 +15,12 @@ env:
   - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.5 SUITE=default
   - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.5 SUITE=docker_version
 
+before_install:
+  - gem install inspec
+
 install:
-  - make install
+  - pip install ansible==${ANSIBLE_VERSION}
 script:
-  - ansible-playbook --syntax-check -i tests/hosts tests/$(suite)/test.yml
-  - ansible-playbook -i tests/hosts tests/$(suite)/test.yml
-  - inspec exec tests/$(suite)/role_spec.rb
+  - ansible-playbook --syntax-check -i tests/hosts tests/${SUITE}/test.yml
+  - ansible-playbook -i tests/hosts tests/${SUITE}/test.yml
+  - inspec exec tests/${SUITE}/role_spec.rb
