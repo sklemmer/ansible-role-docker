@@ -8,7 +8,7 @@ export ANSIBLE_CONFIG=tests/ansible.cfg
 
 install:
 	gem install inspec
-	pip install ansble==$(ansible)
+	pip install ansible==$(ansible)
 
 syntax:
 	ansible-playbook --syntax-check -i tests/hosts tests/$(suite)/test.yml
