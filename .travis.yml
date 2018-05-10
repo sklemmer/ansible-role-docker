@@ -30,5 +30,4 @@ script:
   - ansible-playbook -i tests/inventory tests/${SUITE}/test.yml --syntax-check
   - ansible-playbook -i tests/inventory tests/${SUITE}/test.yml
   - sudo chmod 0777 /etc/docker
-  - ls -al /etc/docker
   - inspec exec tests/${SUITE}/role_spec.rb
