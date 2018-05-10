@@ -18,8 +18,6 @@ env:
   - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.5 SUITE=docker_version
 
 before_install:
-- gem update --system
-- gem --version
 - rvm @global do gem install inspec
 - inspec --version
 
@@ -29,4 +27,4 @@ script:
   #- ansible-galaxy install -p ../ -r tests/requirements.yml
   - ansible-playbook -i tests/inventory tests/${SUITE}/test.yml --syntax-check
   - ansible-playbook -i tests/inventory tests/${SUITE}/test.yml
-  - sudo inspec exec tests/${SUITE}/role_spec.rb
+  - inspec exec tests/${SUITE}/role_spec.rb
