@@ -18,7 +18,7 @@ env:
   - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.5 SUITE=docker_version
 
 before_install:
-  - rvm @global do gem install inspec
+  - sudo rvm @global do gem install inspec
   - inspec --version
 
 install:
