@@ -9,12 +9,19 @@ addons:
     update: True
     packages:
       - python-apt
+      - ruby-dev
 
 env:
   - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.4 SUITE=default
   - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.4 SUITE=docker_version
   - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.5 SUITE=default
   - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.5 SUITE=docker_version
+
+before_install:
+- gem update --system
+- gem --version
+- rvm @global do gem install inspec
+- inspec --version
 
 install:
   - pip install ansible==${ANSIBLE_VERSION}
