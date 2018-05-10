@@ -19,6 +19,3 @@ install:
   - make install
 script:
   - make suite=${SUITE} ansible=${ANSIBLE_VERSION}
-
-notifications:
-  webhooks: https://galaxy.ansible.com/api/v1/notifications/
