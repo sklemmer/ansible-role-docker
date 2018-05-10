@@ -1,4 +1,4 @@
-sudo: enabled
+sudo: required
 language: python
 python: "2.7"
 
@@ -29,4 +29,6 @@ script:
   #- ansible-galaxy install -p ../ -r tests/requirements.yml
   - ansible-playbook -i tests/inventory tests/${SUITE}/test.yml --syntax-check
   - ansible-playbook -i tests/inventory tests/${SUITE}/test.yml
-  - sudo inspec exec tests/${SUITE}/role_spec.rb
+  - sudo chmod 0777 /etc/docker
+  - ls -al /etc/docker
+  - inspec exec tests/${SUITE}/role_spec.rb
