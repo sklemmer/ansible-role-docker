@@ -16,9 +16,6 @@ env:
   - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.5 SUITE=default
   - ANSIBLE_CONFIG=tests/ansible.cfg ANSIBLE_VERSION=2.5 SUITE=docker_version
 
-before_install:
-  - gem install inspec
-
 install:
   - pip install ansible==${ANSIBLE_VERSION}
 script:
