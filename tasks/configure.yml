@@ -2,7 +2,7 @@
 - name: Define Docker configuration
   set_fact:
     docker_config: "{{ docker_config|combine({ item.key: item.value }) }}"
-  when: item.value != ""
+  when: item.value != "" and item.key not in docker_config
   with_dict: "{{ docker_options }}"
 
 - include_tasks: "{{ role_path }}/tasks/storage_drivers/{{ docker_storage_driver }}.yml"
