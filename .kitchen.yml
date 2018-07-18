@@ -11,7 +11,7 @@ provisioner:
   role_name: ansible-role-docker
   ansible_cfg_path: "./tests/ansible.cfg"
   ansible_inventory: "./tests/inventory"
-  requirements_path: tests/requirements.yml
+  #requirements_path: tests/requirements.yml
   #### general
   ansible_verbose: true
   idempotency_test: true

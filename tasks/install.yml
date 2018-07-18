@@ -40,7 +40,20 @@
     state: present
     name: 'docker-ce{{ docker_version }}'
 
-- name: install ansible dependencies for docker
+- name: install ansible <2.6 dependencies for docker
   pip:
     name: docker-py
     state: present
+  when: ansible_version < 2.6
+
+- name: remove old ansible dependencies for docker
+  pip:
+    name: docker-py
+    state: absent
+  when: ansible_version >= 2.6
+
+- name: install ansible >2.6 dependencies for docker
+  pip:
+    name: docker
+    state: present
+  when: ansible_version >= 2.6
