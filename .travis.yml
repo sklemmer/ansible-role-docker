@@ -16,7 +16,7 @@ addons:
 env:
   global:
     - ANSIBLE_CONFIG=tests/ansible.cfg
-    - ANSIBLE_VERSION=2.5
+    - ANSIBLE_VERSION=2.6
   matrix:
     - SUITE=default
     - SUITE=docker_version
